@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Celebration 2023-2024</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      overflow: hidden;
+      background-color: #000;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .full-screen-text {
+      font-size: 72px;
+      font-weight: bold;
+      text-align: center;
+      white-space: nowrap;
+      animation: fadeInAndOut 4s linear infinite;
+    }
+
+    @keyframes fadeInAndOut {
+      0%, 100% {
+        opacity: 0;
+      }
+      50% {
+        opacity: 1;
+      }
+    }
+
+    .background-change {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      animation: changeBackgroundColor 10s linear infinite;
+    }
+
+    @keyframes changeBackgroundColor {
+      0% {
+        background-color: #ff6f61;
+      }
+      25% {
+        background-color: #61c0bf;
+      }
+      50% {
+        background-color: #ff0;
+      }
+      75% {
+        background-color: #00f;
+      }
+      100% {
+        background-color: #f00;
+      }
+    }
+
+    .firework {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: #f00;
+      border-radius: 50%;
+      animation: explode 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+
+    .light-beam {
+      position: absolute;
+      width: 5px;
+      height: 80px;
+      background-color: #fff;
+      transform-origin: bottom;
+      animation: beamUp 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes beamUp {
+      0% {
+        transform: scaleY(0);
+        opacity: 0;
+      }
+      100% {
+        transform: scaleY(1);
+        opacity: 1;
+      }
+    }
+
+    .balloon {
+      position: absolute;
+      width: 30px;
+      height: 50px;
+      background-color: #ff0;
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      animation: floatUp 5s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes floatUp {
+      0% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-100vh) scale(0);
+        opacity: 0;
+      }
+    }
+
+    .cracker {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff0;
+      clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+      animation: explode 2s ease-out forwards;
+      opacity: 0;
+    }
+
+    @keyframes explode {
+      0% {
+        transform: scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: scale(10);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<script>
+  // Additional JavaScript code
+  setTimeout(function() {
+    startCelebration();
+  }, 0); // Delay for 0 milliseconds
+
+  function startCelebration() {
+    setTimeout(function() {
+      changeText();
+      setInterval(changeBackgroundColor, 1000);
+      createFireworks();
+      createLights();
+      createBalloons();
+      createCrackers();
+    }, 5000); // Change text and start celebration after 5 seconds
+  }
+
+  function changeText() {
+    const textContainer = document.querySelector('.full-screen-text');
+    textContainer.innerHTML = 'Welcome 2024';
+  }
+
+  function changeBackgroundColor() {
+    const backgroundChange = document.querySelector('.background-change');
+    backgroundChange.style.backgroundColor = getRandomColor();
+  }
+
+  function getRandomColor() {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    for (let i = 0; i < 6; i++) {
+      color += letters[Math.floor(Math.random() * 16)];
+    }
+    return color;
+  }
+
+  function createFireworks() {
+    const container = document.querySelector('body');
+
+    for (let i = 0; i < 3; i++) {
+      createFirework(container);
+    }
+  }
+
+  function createFirework(container) {
+    const firework = document.createElement('div');
+    firework.className = 'firework';
+    firework.style.top = Math.random() * 100 + 'vh';
+    firework.style.left = Math.random() * 100 + 'vw';
+
+    container.appendChild(firework);
+
+    setTimeout(() => {
+      firework.remove();
+    }, 2000);
+  }
+
+  function createLights() {
+    const container = document.querySelector('body');
+
+    for (let i = 0; i < 2; i++) {
+      createLight(container);
+    }
+  }
+
+  function createLight(container) {
+    const lightBeam = document.createElement('div');
+    lightBeam.className = 'light-beam';
+    lightBeam.style.left = Math.random() * 100 + 'vw';
+
+    container.appendChild(lightBeam);
+
+    setTimeout(() => {
+      lightBeam.remove();
+    }, 2000);
+  }
+
+  function createBalloons() {
+    const container = document.querySelector('body');
+
+    for (let i = 0; i < 5; i++) {
+      createBalloon(container);
+    }
+  }
+
+  function createBalloon(container) {
+    const balloon = document.createElement('div');
+    balloon.className = 'balloon';
+    balloon.style.top = '100vh';
+    balloon.style.left = Math.random() * 100 + 'vw';
+
+    container.appendChild(balloon);
+
+    setTimeout(() => {
+      balloon.remove();
+    }, 5000);
+  }
+
+  function createCrackers() {
+    const container = document.querySelector('body');
+
+    for (let i = 0; i < 3; i++) {
+      createCracker(container);
+    }
+  }
+
+  function createCracker(container) {
+    const cracker = document.createElement('div');
+    cracker.className = 'cracker';
+    cracker.style.top = Math.random() * 100 + 'vh';
+    cracker.style.left = Math.random() * 100 + 'vw';
+
+    container.appendChild(cracker);
+
+    setTimeout(() => {
+      cracker.remove();
+    }, 2000);
+  }
+</script>
+
+<div class="background-change"></div>
+<div class="full-screen-text">Goodbye 2023</div>
+
+</body>
+</html>
